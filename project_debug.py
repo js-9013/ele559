@@ -3,6 +3,7 @@ from zeropdk.layout import layout_box
 from zeropdk.layout import layout_waveguide
 from zeropdk.layout import bezier_optimal
 from zeropdk.layout.waveguide_rounding import *
+from zeropdk.layout.polygons import layout_path
 
 to_exclude = ['layout_waveguide_from_points']
 
@@ -81,7 +82,10 @@ TOP = layout.create_cell("TOP")
 workingLayer =  pya.LayerInfo(4,0)   
 chipBorder = pya.LayerInfo(7,0)
 maskBorder = pya.LayerInfo(10,0)
-outputLayer = pya.LayerInfo(1,0)    
+outputLayer = pya.LayerInfo(1,0)
+sourceLayer = pya.LayerInfo(3,0)
+port1Layer = pya.LayerInfo(2,0)
+port2Layer = pya.LayerInfo(5,0)
 
 ex = pya.DVector(1,0)
 ey = pya.DVector(0,1)
@@ -297,6 +301,8 @@ cavityIntroEnd = cavityFeedlineEnd - 5*ex - La*ex
 upperPinW = 11
 cPinW = 3
 
+layout_path(TOP, port1Layer, [cavityFeedlineEnd - 5*ex - 10*ey, cavityFeedlineEnd - 5*ex + 10*ey], 0)
+
 upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedlineEnd - 5*ex, cavityIntroEnd], upperPinW))
 lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedlineEnd - 5*ex, cavityIntroEnd], cPinW))
 bendPoints = [cavityIntroEnd, cavityIntroEnd - braggBendRadius*ex, cavityIntroEnd - braggBendRadius*ex - braggBendRadius*ey]
@@ -372,6 +378,10 @@ lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, c
 
 #cheesing it
 cavityStraightEnd = 2911*ex + 1.5*ey
+
+layout_path(TOP, sourceLayer, [cavityStraightEnd -10*ex - 75 * ey, cavityStraightEnd -10*ex + 75 * ey], 0)
+layout_path(TOP, port2Layer, [cavityStraightEnd - 10*ey, cavityStraightEnd + 10*ey], 0)
+
 upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], upperPinW))
 lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], cPinW))
 
