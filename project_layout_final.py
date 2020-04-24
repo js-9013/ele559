@@ -315,5 +315,5 @@ print(2*deltaY)
 
 layout.clear_layer(workingLayer)
 
-layout.write('project_debug.gds')
+layout.write('project.gds')
 del layout, TOP
