@@ -9,8 +9,8 @@ layout.dbu = 0.001
 TOP = layout.create_cell("TOP")
 
 workingLayer = layout.layer(4,0) 
-chipBorder = layout.layer(7,0)
-maskBorder = layout.layer(10,0)
+chipBorder = layout.layer(7,0) #computational layer
+maskBorder = layout.layer(10,0) #nbtin layer
 outputLayer = layout.layer(1,0)
 sourceLayer = layout.layer(3,0)
 port1Layer = layout.layer(2,0)
@@ -278,6 +278,7 @@ layout_path(TOP, port2Layer, [-chipWidth/2*ex+20*ex+cavityStraightEnd - 1.5*ey, 
 cpwStraight(layout, TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], upperPinW, cPinW, upperRegion, lowerRegion)
 
 layout_box(TOP, chipBorder, -chipWidth/2*ex+cavityStraightEnd - 1000*ey, -chipWidth/2*ex+cavityFeedlineEnd-5*ex + 1000*ey, ex)
+layout_box(TOP, maskBorder, -chipWidth/2*ex+cavityStraightEnd - 1000*ey, -chipWidth/2*ex+cavityFeedlineEnd-5*ex + 1000*ey, ex)
 
 cavityRegion = upperRegion-lowerRegion-feedlineRegion-lowZBraggRegion-highZBraggRegion-cavityFeedlineRegion
 
