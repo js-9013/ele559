@@ -126,35 +126,35 @@ deltaY = 0
 taperPoints = [300*ex, 425*ex, 550*ex]
 upperTaperWidths = [450, 305, 160]
 lowerTaperWidths = [250, 175, 100]
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, taperPoints, upperTaperWidths))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, taperPoints, lowerTaperWidths))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, taperPoints, upperTaperWidths))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, taperPoints, lowerTaperWidths))
 
 #CPW straight to first bend
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [550*ex, (550 + introFeedlineLength)*ex], upperRegionFeedlineWidth))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [550*ex, (550 + introFeedlineLength)*ex], lowerRegionFeedlineWidth))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [550*ex, (550 + introFeedlineLength)*ex], upperRegionFeedlineWidth))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [550*ex, (550 + introFeedlineLength)*ex], lowerRegionFeedlineWidth))
 
 #CPW bend on feedline
 arcCoord1 = (550+introFeedlineLength) * ex
 arcCoord2 = arcCoord1 - 2*feedlineBendRadius*ey
 bendPoints = [arcCoord1, arcCoord1 + feedlineBendRadius*ex, arcCoord2 + feedlineBendRadius*ex, arcCoord2]
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionFeedlineWidth, feedlineBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, lowerRegionFeedlineWidth, feedlineBendRadius))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionFeedlineWidth, feedlineBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, lowerRegionFeedlineWidth, feedlineBendRadius))
 deltaY = deltaY + 2*feedlineBendRadius
 
 #CPW straight after 1st bend
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [arcCoord2, arcCoord2-55*ex], upperRegionFeedlineWidth))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [arcCoord2, arcCoord2-55*ex], lowerRegionFeedlineWidth))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [arcCoord2, arcCoord2-55*ex], upperRegionFeedlineWidth))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [arcCoord2, arcCoord2-55*ex], lowerRegionFeedlineWidth))
 
 #2nd CPW bend
 bendEndPoint = arcCoord2-55*ex-(feedlineBendRadius*ex)-feedlineBendRadius*ey
 bendPoints = [arcCoord2-55*ex, arcCoord2-55*ex-(feedlineBendRadius*ex), bendEndPoint]
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionFeedlineWidth, feedlineBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, lowerRegionFeedlineWidth, feedlineBendRadius))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionFeedlineWidth, feedlineBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, lowerRegionFeedlineWidth, feedlineBendRadius))
 deltaY = deltaY + feedlineBendRadius
 
 #end feedline with straight
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [bendEndPoint, bendEndPoint-4500*ey], upperRegionFeedlineWidth, feedlineBendRadius))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [bendEndPoint, bendEndPoint-4500*ey], lowerRegionFeedlineWidth, feedlineBendRadius))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [bendEndPoint, bendEndPoint-4500*ey], upperRegionFeedlineWidth, feedlineBendRadius))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [bendEndPoint, bendEndPoint-4500*ey], lowerRegionFeedlineWidth, feedlineBendRadius))
 feedlineEndPoint = bendEndPoint - 4500*ey
 deltaY = deltaY + 4500
 
@@ -169,8 +169,8 @@ braggTaperLength = 20
 taperPoints = [feedlineEndPoint, feedlineEndPoint - 10*ey, feedlineEndPoint - 20*ey]
 upperTaperWidths = [160, 125, 90]
 lowerTaperWidths = [lowerRegionFeedlineWidth, 90, 80]
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, taperPoints, upperTaperWidths))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, taperPoints, lowerTaperWidths))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, taperPoints, upperTaperWidths))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, taperPoints, lowerTaperWidths))
 deltaY = deltaY + 20
 
 feedlineRegion = upperRegion - lowerRegion
@@ -184,34 +184,34 @@ lowZStraightLength = lowZLength/3 - np.pi*braggBendRadius
 highZLength = 13020.7
 highZStraightLength = highZLength/2 - np.pi*braggBendRadius
 introLowZBegin = feedlineEndPoint - (20*ey) - (lowZStraightLength/2*ey)
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [feedlineEndPoint - 20 * ey, feedlineEndPoint - (20*ey) - (lowZStraightLength/2*ey)], upperRegionBraggPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [feedlineEndPoint - 20*ey, feedlineEndPoint - (20*ey) - (lowZStraightLength/2*ey)], lowerRegionBraggPinW))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [feedlineEndPoint - 20 * ey, feedlineEndPoint - (20*ey) - (lowZStraightLength/2*ey)], upperRegionBraggPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [feedlineEndPoint - 20*ey, feedlineEndPoint - (20*ey) - (lowZStraightLength/2*ey)], lowerRegionBraggPinW))
 
 #1st low Z bend
 introLowZEnd = introLowZBegin + 2*braggBendRadius*ex
 bendPoints = [introLowZBegin, introLowZBegin - braggBendRadius*ey, introLowZEnd - braggBendRadius*ey, introLowZEnd]
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, lowerRegionBraggPinW, braggBendRadius))
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [introLowZEnd, introLowZEnd + lowZStraightLength*ey], upperRegionBraggPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [introLowZEnd, introLowZEnd + lowZStraightLength*ey], lowerRegionBraggPinW))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, lowerRegionBraggPinW, braggBendRadius))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [introLowZEnd, introLowZEnd + lowZStraightLength*ey], upperRegionBraggPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [introLowZEnd, introLowZEnd + lowZStraightLength*ey], lowerRegionBraggPinW))
 
 #2nd low Z bend
 secondLowZBendBegin = introLowZEnd + lowZStraightLength * ey
 secondLowZBendEnd = secondLowZBendBegin + 2*braggBendRadius * ex
 bendPoints = [secondLowZBendBegin, secondLowZBendBegin + braggBendRadius*ey, secondLowZBendEnd+braggBendRadius*ey, secondLowZBendEnd]
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, lowerRegionBraggPinW, braggBendRadius))
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [secondLowZBendEnd, secondLowZBendEnd - lowZStraightLength*ey], upperRegionBraggPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [secondLowZBendEnd, secondLowZBendEnd - lowZStraightLength*ey], lowerRegionBraggPinW))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, lowerRegionBraggPinW, braggBendRadius))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [secondLowZBendEnd, secondLowZBendEnd - lowZStraightLength*ey], upperRegionBraggPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [secondLowZBendEnd, secondLowZBendEnd - lowZStraightLength*ey], lowerRegionBraggPinW))
 
 #3rd low Z bend
 thirdLowZBendBegin = introLowZEnd + 2*braggBendRadius*ex
 thirdLowZBendEnd = thirdLowZBendBegin + 2*braggBendRadius*ex
 bendPoints = [thirdLowZBendBegin, thirdLowZBendBegin - braggBendRadius*ey, thirdLowZBendEnd - braggBendRadius*ey, thirdLowZBendEnd]
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, lowerRegionBraggPinW, braggBendRadius))
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [thirdLowZBendEnd, thirdLowZBendEnd + (lowZStraightLength/2*ey)], upperRegionBraggPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [thirdLowZBendEnd, thirdLowZBendEnd + (lowZStraightLength/2*ey)], lowerRegionBraggPinW))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, lowerRegionBraggPinW, braggBendRadius))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [thirdLowZBendEnd, thirdLowZBendEnd + (lowZStraightLength/2*ey)], upperRegionBraggPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [thirdLowZBendEnd, thirdLowZBendEnd + (lowZStraightLength/2*ey)], lowerRegionBraggPinW))
 
 lowZBraggRegion = upperRegion-lowerRegion-feedlineRegion
 
@@ -222,21 +222,21 @@ firstHighZBegin = thirdLowZBendEnd + (lowZStraightLength/2*ey)
 firstHighZBendBegin = firstHighZBegin + highZStraightLength/2*ey
 firstHighZBendEnd = firstHighZBendBegin + 2*braggBendRadius*ex
 highZNegW = 10
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [firstHighZBegin, firstHighZBendBegin], upperRegionBraggPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [firstHighZBegin, firstHighZBendBegin], highZNegW))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [firstHighZBegin, firstHighZBendBegin], upperRegionBraggPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [firstHighZBegin, firstHighZBendBegin], highZNegW))
 bendPoints = [firstHighZBendBegin, firstHighZBendBegin + braggBendRadius*ey, firstHighZBendEnd + braggBendRadius*ey, firstHighZBendEnd]
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, highZNegW, braggBendRadius))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, highZNegW, braggBendRadius))
 secondHighZBendBegin = firstHighZBendEnd - highZStraightLength*ey
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [firstHighZBendEnd, secondHighZBendBegin], upperRegionBraggPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [firstHighZBendEnd, secondHighZBendBegin], highZNegW))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [firstHighZBendEnd, secondHighZBendBegin], upperRegionBraggPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [firstHighZBendEnd, secondHighZBendBegin], highZNegW))
 secondHighZBendEnd = secondHighZBendBegin + 2*braggBendRadius*ex
 bendPoints = [secondHighZBendBegin, secondHighZBendBegin - braggBendRadius*ey, secondHighZBendEnd - braggBendRadius*ey, secondHighZBendEnd]
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, highZNegW, braggBendRadius))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, highZNegW, braggBendRadius))
 firstHighZRegionEnd = secondHighZBendEnd + highZStraightLength/2*ey
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [secondHighZBendEnd, firstHighZRegionEnd], upperRegionBraggPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [secondHighZBendEnd, firstHighZRegionEnd], highZNegW))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [secondHighZBendEnd, firstHighZRegionEnd], upperRegionBraggPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [secondHighZBendEnd, firstHighZRegionEnd], highZNegW))
 
 highZBraggRegion = upperRegion-lowerRegion-feedlineRegion-lowZBraggRegion
 
@@ -250,46 +250,46 @@ cavityFeedBegin = feedlineEndPoint - (20*ey) + 36*braggBendRadius*ex
 cavityFeedBendBegin = cavityFeedBegin - lowZStraightLength/2*ey
 cavityFeedBendEnd = cavityFeedBendBegin + 2*braggBendRadius*ex
 bendPoints = [cavityFeedBendBegin, cavityFeedBendBegin - braggBendRadius*ey, cavityFeedBendEnd - braggBendRadius*ey, cavityFeedBendEnd]
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedBegin, cavityFeedBendBegin], upperRegionBraggPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedBegin, cavityFeedBendBegin], highZNegW))
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, highZNegW, braggBendRadius))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedBegin, cavityFeedBendBegin], upperRegionBraggPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedBegin, cavityFeedBendBegin], highZNegW))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, highZNegW, braggBendRadius))
 cavityFeedStraightEnd = cavityFeedBendEnd + (highZVert + highZAdjust)*ey
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedBendEnd, cavityFeedStraightEnd], upperRegionBraggPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedBendEnd, cavityFeedStraightEnd], highZNegW))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedBendEnd, cavityFeedStraightEnd], upperRegionBraggPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedBendEnd, cavityFeedStraightEnd], highZNegW))
 
 cavityFeedFirstBendEnd = cavityFeedStraightEnd - braggBendRadius*ex + braggBendRadius*ey
 bendPoints = [cavityFeedStraightEnd, cavityFeedStraightEnd + braggBendRadius*ey, cavityFeedFirstBendEnd]
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, highZNegW, braggBendRadius))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, highZNegW, braggBendRadius))
 
 secondBendCavityBegin = cavityFeedFirstBendEnd - highZHoriz*ex
 secondBendCavityEnd = secondBendCavityBegin - braggBendRadius*ex + braggBendRadius*ey
 bendPoints = [secondBendCavityBegin, secondBendCavityBegin - braggBendRadius*ex, secondBendCavityEnd]
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedFirstBendEnd, secondBendCavityBegin], upperRegionBraggPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedFirstBendEnd, secondBendCavityBegin], highZNegW))
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, highZNegW, braggBendRadius))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedFirstBendEnd, secondBendCavityBegin], upperRegionBraggPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedFirstBendEnd, secondBendCavityBegin], highZNegW))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, highZNegW, braggBendRadius))
 
 vertStraightEnd = secondBendCavityEnd + highZEndVert*ey
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [secondBendCavityEnd, vertStraightEnd], upperRegionBraggPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [secondBendCavityEnd, vertStraightEnd], highZNegW))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [secondBendCavityEnd, vertStraightEnd], upperRegionBraggPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [secondBendCavityEnd, vertStraightEnd], highZNegW))
 
 thirdBendEnd = vertStraightEnd + braggBendRadius*ey - braggBendRadius*ex
 bendPoints = [vertStraightEnd, vertStraightEnd + braggBendRadius*ey, thirdBendEnd]
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, highZNegW, braggBendRadius))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperRegionBraggPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, highZNegW, braggBendRadius))
 
 cavityFeedlineEnd = thirdBendEnd - highZEndVert*ex
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [thirdBendEnd, cavityFeedlineEnd], upperRegionBraggPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [thirdBendEnd, cavityFeedlineEnd], highZNegW))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [thirdBendEnd, cavityFeedlineEnd], upperRegionBraggPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [thirdBendEnd, cavityFeedlineEnd], highZNegW))
 
 #cavity to Bragg taper
 taperPoints = [cavityFeedlineEnd, cavityFeedlineEnd - 5*ex]
 upperTaperWidths = [upperRegionBraggPinW, 11]
 lowerTaperWidths = [highZNegW, 3]
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, taperPoints, upperTaperWidths))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, taperPoints, lowerTaperWidths))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, taperPoints, upperTaperWidths))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, taperPoints, lowerTaperWidths))
 
 cavityFeedlineRegion = upperRegion-lowerRegion-feedlineRegion-lowZBraggRegion-highZBraggRegion
 
@@ -305,54 +305,54 @@ cPinW = 3
 
 layout_path(TOP, port1Layer, [cavityFeedlineEnd - 5*ex - 10*ey, cavityFeedlineEnd - 5*ex + 10*ey], 0)
 
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedlineEnd - 5*ex, cavityIntroEnd], upperPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedlineEnd - 5*ex, cavityIntroEnd], cPinW))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedlineEnd - 5*ex, cavityIntroEnd], upperPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityFeedlineEnd - 5*ex, cavityIntroEnd], cPinW))
 bendPoints = [cavityIntroEnd, cavityIntroEnd - braggBendRadius*ex, cavityIntroEnd - braggBendRadius*ex - braggBendRadius*ey]
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, cPinW, braggBendRadius))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, cPinW, braggBendRadius))
 cavityVertEnd = cavityIntroEnd - braggBendRadius*ex - braggBendRadius*ey - Lv*ey
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, [cavityIntroEnd - braggBendRadius*ex - braggBendRadius*ey, cavityVertEnd], upperPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, [cavityIntroEnd - braggBendRadius*ex - braggBendRadius*ey, cavityVertEnd], cPinW, braggBendRadius))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, [cavityIntroEnd - braggBendRadius*ex - braggBendRadius*ey, cavityVertEnd], upperPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, [cavityIntroEnd - braggBendRadius*ex - braggBendRadius*ey, cavityVertEnd], cPinW, braggBendRadius))
 bendPoints = [cavityVertEnd, cavityVertEnd-braggBendRadius*ey, cavityVertEnd-braggBendRadius*ey-braggBendRadius*ex]
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, cPinW, braggBendRadius))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, cPinW, braggBendRadius))
 cavityStraightBegin = cavityVertEnd - braggBendRadius*ey-braggBendRadius*ex
 cavityStraightEnd = cavityStraightBegin - cavityStraightLength*ex
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], upperPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], cPinW))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], upperPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], cPinW))
 bendPoints = [cavityStraightEnd, cavityStraightEnd - braggBendRadius*ex, cavityStraightEnd - braggBendRadius*ex + braggBendRadius*ey]
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, cPinW, braggBendRadius))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, cPinW, braggBendRadius))
 cavityStraightBegin = cavityStraightEnd - braggBendRadius*ex + braggBendRadius*ey
 cavityStraightEnd = cavityStraightBegin + Lv*ey
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], upperPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], cPinW))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], upperPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], cPinW))
 bendPoints = [cavityStraightEnd, cavityStraightEnd + braggBendRadius*ey, cavityStraightEnd + braggBendRadius*ex + braggBendRadius*ey]
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, cPinW, braggBendRadius))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, cPinW, braggBendRadius))
 
 cavityHorizBegin = cavityStraightEnd + braggBendRadius*ex + braggBendRadius*ey
 cavityHorizEnd = cavityHorizBegin + Lh*ex
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityHorizBegin, cavityHorizEnd], upperPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityHorizBegin, cavityHorizEnd], cPinW))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityHorizBegin, cavityHorizEnd], upperPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityHorizBegin, cavityHorizEnd], cPinW))
 
 cavityStraightBegin = cavityHorizEnd + braggBendRadius*ex + braggBendRadius*ey
 bendPoints = [cavityHorizEnd, cavityHorizEnd + braggBendRadius*ex, cavityStraightBegin]
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, cPinW, braggBendRadius))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, cPinW, braggBendRadius))
 
 cavityStraightEnd = cavityStraightBegin + Lv*ey
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], upperPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], cPinW))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], upperPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], cPinW))
 
 cavityStraightBegin = cavityStraightEnd + braggBendRadius*ey - braggBendRadius*ex
 bendPoints = [cavityStraightEnd, cavityStraightEnd + braggBendRadius*ey, cavityStraightBegin]
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, cPinW, braggBendRadius))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, cPinW, braggBendRadius))
 
 cavityStraightEnd = cavityStraightBegin - cavityStraightLength*ex
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], upperPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], cPinW))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], upperPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], cPinW))
 
 
 #--------THOMAS - this is where the bend posing a problem is --------------------------------------------------#
@@ -374,13 +374,13 @@ TOP.shapes(outputLayer).insert(lower_shape)
 #--------------------end---------------------------------------------------------------------------------------#
 
 cavityStraightEnd = cavityStraightBegin - Lv*ey + 1.5*ey
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], upperPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], cPinW))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], upperPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], cPinW))
 
 cavityStraightBegin = cavityStraightEnd - braggBendRadius*ex - braggBendRadius*ey
 bendPoints = [cavityStraightEnd, cavityStraightEnd - braggBendRadius*ey, cavityStraightBegin]
-#upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperPinW, braggBendRadius))
-#lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, cPinW, braggBendRadius))
+upperRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, upperPinW, braggBendRadius))
+lowerRegion.insert(layout_waveguide_from_points(TOP, workingLayer, bendPoints, cPinW, braggBendRadius))
 
 #cheesing it
 cavityStraightEnd = 2911*ex + 1.5*ey
@@ -388,8 +388,8 @@ cavityStraightEnd = 2911*ex + 1.5*ey
 layout_path(TOP, sourceLayer, [cavityStraightEnd -10*ex - 75 * ey, cavityStraightEnd -10*ex + 75 * ey], 0)
 layout_path(TOP, port2Layer, [cavityStraightEnd - 10*ey, cavityStraightEnd + 10*ey], 0)
 
-#upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], upperPinW))
-#lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], cPinW))
+upperRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], upperPinW))
+lowerRegion.insert(layout_waveguide(TOP, workingLayer, [cavityStraightBegin, cavityStraightEnd], cPinW))
 
 cavityRegion = upperRegion-lowerRegion-feedlineRegion-lowZBraggRegion-highZBraggRegion-cavityFeedlineRegion
 
