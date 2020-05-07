@@ -331,5 +331,5 @@ print(2*deltaY)
 
 layout.clear_layer(workingLayer)
 
-layout.write('project.gds')
+layout.write('sim.gds')
 del layout, TOP
